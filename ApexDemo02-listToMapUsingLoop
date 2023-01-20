@@ -1,0 +1,35 @@
+// 2. Query 5 Account records into a list. Now iterate on a list and create a map where key will be account Id and value will be 
+// Account sObject (using loop) and display values of map.
+public class ApexDemo02 {
+    //Version 01
+    public static void listToMapUsingLoop(){
+        List<Account> accList = new List<Account>();
+        Map<Id,Account> accMap = new Map<Id,Account>();
+        
+        accList = [SELECT Id FROM Account LIMIT 5];
+        
+        for(Account acc : accList){
+            accMap.put(acc.Id,acc);
+        }
+        System.debug(accMap);
+        
+        for(Id k : accMap.keySet()){
+            System.debug(accMap.get(k));
+        }
+    }
+    
+    //Version 02
+    public static void listToMap_UsingLoop(){
+        List<Account> accList = new List<Account>();
+        Map<Id,Account> accMap = new Map<Id,Account>();
+        
+        for(Account acc : [SELECT Id FROM Account LIMIT 5]){
+            accMap.put(acc.Id,acc);
+        }
+        System.debug(accMap);
+        
+        for(Id k : accMap.keySet()){
+            System.debug(accMap.get(k));
+        }
+    }
+}
