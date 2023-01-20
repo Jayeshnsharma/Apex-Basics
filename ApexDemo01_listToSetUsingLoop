@@ -1,0 +1,17 @@
+//1. Query 5 Account records into a list. Now iterate on a list and create a set of account Ids and display value of the set.
+public class ApexDemo01 {
+    public static void listToSetUsingLoop(){
+        List<Account> accList = new List<Account>();
+        Set<Id> idSet = new Set<Id>();
+        
+        accList = [SELECT Id FROM Account LIMIT 5];
+        
+        for(Account act : accList){
+            idSet.add(act.Id);
+        }
+        
+        for(Id i : idSet){
+            System.debug('Account Id: '+i);
+        }
+    }
+}
