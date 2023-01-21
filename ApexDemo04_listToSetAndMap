@@ -1,0 +1,39 @@
+//4. Query 5 Account records into a list. Now create a set of Account ID and Map<Id,Account> using a list.
+//Now Iterate on set and check whether set values match with map key, If yes then display map value.
+public class ApexDemo04 {
+    //Version 01
+    public static void listToSetAndMap(){
+        List<Account> accList = new List<Account>();
+        Set<Id> idSet = new Set<Id>();
+        accList = [SELECT Id FROM Account LIMIT 5];
+        Map<Id,Account> accMap = new Map<Id,Account>(accList); //List To Map
+        
+        for(Account acc : accList){
+            idSet.add(acc.Id);
+        }
+        
+        for(Id i : idSet){
+            if(idSet.contains(i)){
+                System.debug(accMap.get(i));
+            }
+        }
+    }
+    //Version 02
+    public static void listTo_SetAndMap(){
+        List<Account> accList = new List<Account>();
+        Set<Id> idSet = new Set<Id>();
+        accList = [SELECT Id FROM Account LIMIT 5];
+        Map<Id,Account> accMap = new Map<Id,Account>();
+        
+        for(Account acc : accList){
+            idSet.add(acc.Id);		//List To Set Conversion
+            accMap.put(acc.Id,acc); //List To Map Conversion
+        }
+        
+        for(Id  i : idSet){
+            if(idSet.contains(i)){
+                System.debug(accMap.get(i));
+            }
+        }
+    }
+}
