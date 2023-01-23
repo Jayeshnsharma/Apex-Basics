@@ -1,0 +1,20 @@
+//Query Account along with related opportunities where Account phone!=null. Now display results through system.debug() in 
+//following ways: "Account Name has TotalAmountOnRelatedOpp worth Opportunities".
+public class ApexDemo09 {
+    public static void oppRelatedToAccountAndTotalAmount(){
+        List<Account> accList = new List<Account>([SELECT Id, Name, (SELECT Name, Amount FROM Opportunities) 
+                                                   FROM Account 
+                                                   WHERE Phone!=null]);
+        for(Account acc : accList){
+            Decimal TotalAmount = 0;
+            for(Opportunity Opp : acc.Opportunities){
+                if(Opp.Amount!=null){
+                    TotalAmount+=opp.Amount;
+                }
+            }
+            System.debug('Account Name: '+acc.Name
+                        +', Number Of Opportunities: '+acc.Opportunities.size()
+                        +', Total Amount: '+TotalAmount);
+        }
+    }
+}
