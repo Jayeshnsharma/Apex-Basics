@@ -1,0 +1,11 @@
+//Query Account along with related contacts where Account phone!=null. Now display results through 
+//system.debug() in following ways: Account Name has #ofcontacts related.
+public class ApexDemo08 {
+    public static void accountWithRelatedcontacts(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT Id,Name,(SELECT Id, Name FROM Contacts) FROM Account WHERE phone!=null];
+        for(Account acc : accList){
+            System.debug('Account Name: '+acc.Name+' has '+acc.Contacts+' and '+'No of Contacts: '+acc.Contacts.size());
+        }
+    }
+}
