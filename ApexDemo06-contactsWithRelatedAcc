@@ -1,0 +1,10 @@
+//6. Query This/Last Week created contacts with related account Name and Phone
+public class ApexDemo06 {
+    public static void contactsWithRelatedAcc(){
+        List<Contact> conList = new List<Contact>();
+        conList = [SELECT Id,Name,Account.Name,Account.Phone FROM Contact WHERE CreatedDate = LAST_WEEK];
+        for(Contact con : conList){
+            System.debug('Contact Name: '+con.Name+', Account Name: '+con.Account.Name+', Phone Number: '+con.Account.Phone);
+        }
+    }
+}
