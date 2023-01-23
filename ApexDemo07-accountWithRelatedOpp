@@ -1,0 +1,33 @@
+//7. Query Account(Id,Name,Phone) with related Opportunities(Name,CloseDate,Stage) where Account Phone!=null.
+//Sort the records in both Asc and Desc Order Based on CreatedDate
+public class ApexDemo07 {
+    //Version 01 - Ascending Order
+    public static void accountWithRelatedOpp(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT Id,Name,Phone, (SELECT Name,CLoseDate,StageName FROM Opportunities)
+                   FROM Account 
+                   WHERE Phone!=null 
+                   ORDER BY CreatedDate ASC];
+        for(Account acc : accList){
+            System.debug('Account Name: '+acc.Name);
+            for(Opportunity opp : acc.Opportunities){
+                System.debug('Opp Name: '+opp.Name
+                            +', Opp Stage: '+opp.StageName);
+            }
+        }
+    }
+    //Version 02 - Descending Order
+    public static void accountWithRelatedOpp_Desc(){
+        List<Account> accList = [SELECT Id,Name,Phone, (SELECT Name,CLoseDate,StageName FROM Opportunities)
+                   FROM Account 
+                   WHERE Phone!=null 
+                   ORDER BY CreatedDate DESC];
+        for(Account acc : accList){
+            System.debug('Account Name: '+acc.Name);
+            for(Opportunity opp : acc.Opportunities){
+                System.debug('Opp Name: '+opp.Name
+                            +', Opp Stage: '+opp.StageName);
+            }
+        }
+    }
+}
