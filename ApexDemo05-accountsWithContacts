@@ -1,0 +1,14 @@
+//Query This/Last Week created Accounts with related records
+public class ApexDemo05 {
+    public static void accountsWithContacts(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT Id, Name, (SELECT Id, Firstname FROM Contacts) FROM Account WHERE CreatedDate = LAST_WEEK];
+        for(account acc : accList){
+            System.debug('Account Name: '+acc.Name);
+            System.debug('Total related contacts: '+acc.Contacts.size());
+            for(Contact con : acc.Contacts){
+                System.debug('Contact First Name: '+con.FirstName);
+            }
+        }
+    }
+}
