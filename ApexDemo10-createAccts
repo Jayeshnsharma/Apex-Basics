@@ -5,12 +5,12 @@ public class ApexDemo10 {
     public static void createAccts(){
         Account acc1 = new Account();
         acc1.Name = 'Jayesh Sharma';
-        acc1.Phone = '9422014699';
+        acc1.Phone = '123456';
         insert acc1;
         
         Account acc2 = new Account();
         acc2.Name='Jay Sharma';
-        acc2.Phone='9404592968';
+        acc2.Phone='123456';
         insert acc2;
     }
     
@@ -19,12 +19,12 @@ public class ApexDemo10 {
         List<Account> accList = new List<Account>();
         Account acc1 = new Account();
         acc1.Name = 'Jayesh Sharma';
-        acc1.Phone = '9422014699';
+        acc1.Phone = '123456';
         accList.add(acc1);
         
         Account acc2 = new Account();
         acc2.Name = 'Jay Sharma';
-        acc2.Phone = '9404592968';
+        acc2.Phone = '123456';
         accList.add(acc2);
         
         if(!accList.isEmpty()){
