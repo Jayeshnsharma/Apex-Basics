@@ -1,0 +1,15 @@
+//11. Insert 5 Accounts with different account Names and Phone='123456'. [Hint: Loop]
+public class ApexDemo11 {
+    public static void accountRecordsWithInsert(){
+        List<Account> accList = new List<Account>();
+        for(Integer i = 1; i <= 5; i++){
+            Account acc = new Account();
+            acc.Name = 'Jay Account '+i;
+            acc.Phone = '123456';
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            insert accList;
+        }
+    }
+}
