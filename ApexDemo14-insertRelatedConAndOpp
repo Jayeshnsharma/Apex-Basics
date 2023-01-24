@@ -1,0 +1,24 @@
+//14. Insert an Account along with 1 related Contact and 1 related Opportunity
+public class ApexDemo14 {
+    public static void insertRelatedConAndOpp(){
+        Account acc = new Account();
+        acc.Name = 'Jayesh Sharma';
+        acc.Phone = '123456';
+        insert acc;
+        if(acc.Id!=null){
+            Contact con = new Contact();
+            con.FirstName = 'Jayesh';
+            con.LastName = 'Sharma';
+            con.AccountId = acc.Id;
+            insert con;
+        }
+        if(acc.Id!=null){
+            Opportunity opp = new Opportunity();
+            opp.Name = 'Jayesh Sharma';
+            opp.CloseDate = System.today()+7;
+            opp.StageName = 'Prospecting';
+            opp.AccountId = acc.Id;
+            insert opp;
+        }
+    }
+}
