@@ -3,7 +3,7 @@ public class ApexDemo13 {
     public static void insertRelatedContacts(){
         Account acc = new Account();
         acc.Name = 'Jayesh Sharma';
-        acc.Phone = '9422014699';
+        acc.Phone = '123456';
         Insert acc;
         if(acc.Id!=null){
             Contact con = new Contact();
