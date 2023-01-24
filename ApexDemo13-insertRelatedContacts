@@ -1,0 +1,16 @@
+//13. Insert an Account along with 1 related Contact
+public class ApexDemo13 {
+    public static void insertRelatedContacts(){
+        Account acc = new Account();
+        acc.Name = 'Jayesh Sharma';
+        acc.Phone = '9422014699';
+        Insert acc;
+        if(acc.Id!=null){
+            Contact con = new Contact();
+            con.Firstname = 'Jayesh';
+            con.LastName = 'Sharma';
+            con.AccountId = acc.Id;
+            insert con;
+        }
+    }
+}
