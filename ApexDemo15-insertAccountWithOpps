@@ -1,0 +1,27 @@
+//15. Insert 5 Accounts with at Least 1 related Opportunity
+public class ApexDemo15 {
+    public static void insertAccountWithOpps(){
+        List<Account> accList = new List<Account>();
+        for(Integer i=1;i<=5;i++){
+            Account acc = new Account();
+            acc.Name = 'Jayesh Sharma '+i;
+            acc.Phone = '123456';
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            insert accList;
+        }
+        List<Opportunity> oppList = new List<Opportunity>();
+        for(Account acc : accList){
+            Opportunity opp = new Opportunity();
+            opp.Name = acc.Name;
+            opp.CloseDate = System.today();
+            opp.StageName = 'Prospecting';
+            opp.AccountId = acc.Id;
+            oppList.add(opp);
+        }
+        if(!oppList.isEmpty()){
+            insert oppList;
+        }
+    }
+}
