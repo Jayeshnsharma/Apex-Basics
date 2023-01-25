@@ -1,0 +1,15 @@
+//17. Query Accounts where Phone='123456' and update Phone to '654321'.
+public class ApexDemo17 {
+    public static void updateAccountPhoneNo(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT Id, Name, Phone FROM Account WHERE Phone='123456'];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                acc.Phone = '654321';
+            }
+        }
+        if(accList.isEmpty()){
+            update accList;
+        }
+    }
+}
