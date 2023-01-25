@@ -1,0 +1,38 @@
+//16. Insert 5 Accounts and a Contact & a Opportunity related to each Account
+public class ApexDemo16 {
+    public static void insertAccountWithConAndOpp(){
+        List<Account> accList = new List<Account>();
+        for(Integer i=1;i<=5;i++){
+            Account acc = new Account();
+            acc.Name = 'Jayesh Sharma';
+            acc.Phone = '123456';
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            insert accList;
+        }
+        List<Opportunity> oppList = new List<Opportunity>();
+        for(Account acc : accList){
+            Opportunity opp = new Opportunity();
+            opp.Name = acc.Name;
+            opp.CloseDate = System.today();
+            opp.StageName = 'Prospecting';
+            opp.AccountId = acc.Id;
+            oppList.add(opp);
+        }
+        if(!oppList.isEmpty()){
+            insert oppList;
+        }
+        List<Contact> conList = new List<Contact>();
+        for(Account acc : accList){
+            Contact con = new Contact();
+            con.Firstname = 'Jayesh';
+            con.LastName = 'Sharma';
+            con.AccountId = acc.Id;
+            conList.add(con);
+        }
+        if(!conList.isEmpty()){
+            insert conList;
+        }
+    }
+}
