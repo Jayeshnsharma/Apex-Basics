@@ -1,0 +1,15 @@
+//18. Query Contacts where Email is null and update their email with abc@gmail.com
+public class ApexDemo18 {
+    public static void updateContactEmail(){
+        List<Contact> conList = new List<Contact>();
+        conList = [SELECT Id, Firstname, Lastname, Phone FROM Contact WHERE Email=Null];
+        if(!conList.isEmpty()){
+            for(Contact con : conList){
+                con.Email = 'abc@gmail.com';
+            }
+        }
+        if(!conList.isEmpty()){
+            update conList;
+        }
+    }
+}
