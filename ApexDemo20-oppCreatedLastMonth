@@ -1,0 +1,22 @@
+//20. Query Opportunities where created date is last month and updated their stage to closed won. Also create 5 new Opportunities. [Hint: Use Upsert]
+public class ApexDemo20 {
+    public static void oppCreatedLastMonth(){
+        List<Opportunity> oppList = new List<Opportunity>();
+        oppList = [SELECT Id,Name FROM Opportunity WHERE CreatedDate=LAST_MONTH];
+        if(!oppList.isEmpty()){
+            for(Opportunity opp : oppList){
+                opp.StageName = 'Closed Won';
+            }
+        }
+        for(Integer i=1;i<=5;i++){
+            Opportunity opp = new Opportunity();
+            opp.Name = 'Jayesh Sharma '+i;
+            opp.CloseDate = System.today()+7;
+            opp.StageName = 'Prospecting';
+            oppList.add(opp);
+        }
+        if(!oppList.isEmpty()){
+            Upsert oppList;
+        }
+    }
+}
