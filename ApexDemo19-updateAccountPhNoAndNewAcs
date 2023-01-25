@@ -1,0 +1,21 @@
+//19. Query Accounts where Phone=654321 and update Phone to 123456. Also create 5 new account records.[Hint: Use Upsert]
+public class ApexDemo19 {
+    public static void updateAccountPhNoAndNewAcs(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECt Id,Name FROM Account WHERE Phone='654321'];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                acc.Phone = '123456';
+            }
+        }
+        for(Integer i=1;i<=5;i++){
+            Account acc = new Account();
+            acc.Name = 'Jayesh Sharma'+i;
+            acc.Phone = '124567890';
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            upsert accList;
+        }
+    }
+}
