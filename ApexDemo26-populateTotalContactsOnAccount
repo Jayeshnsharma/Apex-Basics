@@ -1,0 +1,17 @@
+//26. Query Account with related contacts created in the last one month. Populated 'Total Contacts' Field on Account by Counting number
+//of contacts associated with Account. If no Contact then populate 0.
+public class ApexDemo26 {
+    public static void populateTotalContactsOnAccount(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT ID,Name, Total_Contacts__c,(SELECT ID,Firstname,Lastname FROM Contacts)
+                  FROM Account WHERE CreatedDate = LAST_Week];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                acc.Total_Contacts__c = acc.Contacts.size();
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+    }
+}
