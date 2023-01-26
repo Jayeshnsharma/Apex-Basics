@@ -1,0 +1,15 @@
+//24. Query Accounts created in the last 7 days. Now update their phone number with '123456'
+public class ApexDemo24 {
+    public static void updatePhoneForAccountCreatedLastWeek(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT ID,Name FROM Account WHERE CreatedDate = LAST_WEEK];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                acc.Phone = '123456';
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+    }
+}
