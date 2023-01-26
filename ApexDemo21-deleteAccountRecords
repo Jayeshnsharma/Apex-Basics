@@ -1,0 +1,11 @@
+//21. Delete account records where Phone = '123456'. Verify Whether records are deleted or not through Recycle Bin.
+public class ApexDemo21 {
+    public static void deleteAccountRecords(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT ID,Name,Phone FROM Account WHERE Phone = '123456'];
+        
+        if(!accList.isEmpty()){
+            delete accList;
+        }
+    }
+}
