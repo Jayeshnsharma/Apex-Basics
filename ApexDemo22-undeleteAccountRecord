@@ -1,0 +1,12 @@
+//22.Undelete account records deleted in previous point. Check recycle bin is not having those records once undeleted
+//and they will be under the accounts tab in the app.
+public class ApexDemo22 {
+    public static void undeleteAccountRecord(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT ID,Name FROM Account WHERE Phone = '123456' ALL ROWS];
+        
+        if(!accList.isEmpty()){
+            undelete accList;
+        }
+    }
+}
