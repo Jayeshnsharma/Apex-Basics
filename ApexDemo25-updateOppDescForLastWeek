@@ -1,0 +1,25 @@
+//25. Query Opportunities created in the last 7 days. If the opportunity stage is closed won then update 
+//description as 'Opportunity is Closed Won'. In Case of Closed lost update description as 'Opportunity 
+//is Closed Lost' otherwise 'Opportunity is Open'.
+public class ApexDemo25 {
+    public static void updateOppDescForLastWeek(){
+        List<Opportunity> oppList = new List<Opportunity>();
+        oppList = [SELECT ID,Name,StageName FROM Opportunity WHERE CreatedDate = LAST_WEEK];
+        if(!oppList.isEmpty()){
+            for(Opportunity opp : oppList){
+                if(opp.StageName == 'Closed Won'){
+                    opp.Description = 'Opportunity is Closed Won';
+                }
+                else if(opp.StageName == 'Closed Lost'){
+                    opp.Description = 'Opportunity is Closed Lost';
+                }
+                else{
+                    opp.Description = 'Opportunity is Open';
+                }
+            }
+        }
+        if(!oppList.isEmpty()){
+            update oppList;
+        }
+    }
+}
