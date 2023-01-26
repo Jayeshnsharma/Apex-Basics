@@ -1,0 +1,21 @@
+//23. Query Accounts created Last week. Now insert one opportunity under each account.
+public class ApexDemo23 {
+    public static void oppForAccountCreatedLastWeek(){
+        List<Account> accList = new List<Account>();
+        List<Opportunity> oppList = new List<Opportunity>();
+        accList = [SELECT ID, Name FROM Account WHERE CreatedDate = LAST_WEEK];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                Opportunity opp = new Opportunity();
+                opp.Name = acc.Name;
+                opp.CloseDate = System.today()+7;
+                opp.StageName = 'Prospecting';
+                opp.AccountId = acc.Id;
+                oppList.add(opp);
+            }
+        }
+        if(!oppList.isEmpty()){
+            insert oppList;
+        }
+    }
+}
