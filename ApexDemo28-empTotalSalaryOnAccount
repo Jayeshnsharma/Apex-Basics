@@ -1,0 +1,24 @@
+//28. Create a Custom Object named "Employee". Create Name, Salary, Phone, Lookup(Account) fields on Employee Object. Create a Total Salary Field
+//on Account. Now Query Accounts created this year along with related Employees. Populate total salary of all related employees on account
+//[Parent-Child SOQL]
+public class ApexDemo28 {
+    public static void empTotalSalaryOnAccount(){
+        List<Account> accList = new List<Account>();
+        accList = [SELECT ID, Name, Total_Salary__c,
+                   (SELECT Name, Salary__c FROM Employees__r) 
+                   FROM Account 
+                   WHERE CreatedDate = LAST_YEAR];
+        if(!accList.isEmpty()){
+            for(Account acc : accList){
+                Decimal TotalSalary = 0;
+                for(Employee__c emp : acc.employees__r){
+                    TotalSalary = TotalSalary + emp.Salary__c;
+                }
+                acc.Total_Salary__c = TotalSalary;
+            }
+        }
+        if(!accList.isEmpty()){
+            update accList;
+        }
+    }
+}
