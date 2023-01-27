@@ -1,0 +1,19 @@
+//29. Query Employees created this year and if phone is not populated on Employee Records
+//then copy Phone Of Related Account. [Child-Parent SOQL]
+public class ApexDemo29 {
+    public static void populateAccountPhoneOnEmp(){
+        List<Employee__c> empList = new List<Employee__c>();
+        empList = [SELECT Name, Phone__c, Account__r.Phone From Employee__c 
+                   WHERE CreatedDate = LAST_YEAR];
+        if(!empList.isEmpty()){
+            for(Employee__c emp : empList){
+                if(emp.Phone__c == null){
+                    emp.Phone__c = emp.Account__r.Phone;
+                }
+            }
+        }
+        if(!empList.isEmpty()){
+            update empList;
+        }
+    }
+}
