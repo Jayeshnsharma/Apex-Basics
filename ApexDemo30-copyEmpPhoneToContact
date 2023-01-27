@@ -1,0 +1,19 @@
+//30. Create a Lookup to Employee on Contact Object. Query Contacts created last week and if Mobile phone is not populated
+//on contact then copy Phone to Related Employee.
+public class ApexDemo30 {
+    public static void copyEmpPhonetoContact(){
+        List<Contact> conList = new List<Contact>();
+        conList = [SELECT Id, Phone, Employee__r.Phone__c FROM Contact 
+                   WHERE CreatedDate = LAST_WEEK];
+        if(!conList.isEmpty()){
+            for(Contact con : conList){
+                if(con.Phone == NULL){
+                    con.Phone = con.Employee__r.Phone__c;
+                }
+            }
+        }
+        if(!conList.isEmpty()){
+            update conList;
+        }
+    }
+}
