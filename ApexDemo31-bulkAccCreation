@@ -1,0 +1,19 @@
+//Insert 200 Account records and make sure the governor limit should not hit. Then delete those record as well.
+public class ApexDemo31 {
+    public static void bulkAccCreation(){
+        List<Account> accList = new List<Account>();
+        for(Integer i=1;i<=200;i++){
+            Account acc = new Account();
+            acc.Name = 'Jayesh'+i;
+            acc.Phone = '123456'+i;
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            insert accList;
+        }
+        accList = [SELECT Id FROM Account WHERE CreatedDate = today];
+        if(!accList.isEmpty()){
+            delete accList;
+        }
+    }
+}
